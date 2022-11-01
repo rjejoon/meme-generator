@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './Meme.css';
-import memesData from '../memesData';
-
 
 
 export default function Meme() {
-  const [allMemeImages, setAllMemeImages] = useState(memesData);
+  const [memesData, setMemesData] = useState([]);
+
+  useEffect(() => {
+    const url = "https://api.imgflip.com/get_memes";
+    fetch(url)
+      .then(response => response.json())
+      .then(data => setMemesData(data.data.memes));
+  }, []);
 
   const [meme, setMeme] = useState({
     topText: "One does not simply",
@@ -16,11 +21,11 @@ export default function Meme() {
 
   function getMemeImage(e) {
     e.preventDefault();
-    const rand_i = Math.floor(Math.random() * allMemeImages.data.memes.length);
+    const rand_i = Math.floor(Math.random() * memesData.length);
     setMeme(prevMeme => {
       return {
         ...prevMeme,
-        randomImage: allMemeImages.data.memes[rand_i].url
+        randomImage: memesData[rand_i].url
       };
     });
   }
