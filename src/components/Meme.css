@@ -4,6 +4,7 @@ main {
 
 .meme--form {
   width: 100%;
+  margin-bottom: 36px;
 }
 
 .meme--form-inputs-container {
@@ -39,4 +40,8 @@ main {
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.1em;
+}
+
+.meme--image {
+  width: 100%;
 }
